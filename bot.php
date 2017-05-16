@@ -9,9 +9,11 @@ $botman = BotManFactory::createForRTM([
    "slack_token" => getenv("SLACK_TOKEN")
 ], $loop);
 
+// Search for addresses
 $botman->hears("([\s\S]*)", function ($bot, $addressFull) {
    $m = preg_match("((0x)?[0-9a-fA-F]{40})", $addressFull, $matches);
    if (!$m) return;
+
    $addr = $matches[0];
    $addrs = array("0x960b236a07cf122663c4303350609a66a7b288c0", "0x960b236A07cf122663c4303350609A66A7B288C0", "0x0cEB0D54A7e87Dfa16dDF7656858cF7e29851fD7", "0x0ceb0d54a7e87dfa16ddf7656858cf7e29851fd7");
    if (in_array($addr, $addrs, true)) {
